@@ -187,6 +187,7 @@ public class StudentManagementSystem {
                 start_index = middle_index + 1;
             }
         }
+        System.out.println();
         System.out.println("Student ID not found");
     }
 }

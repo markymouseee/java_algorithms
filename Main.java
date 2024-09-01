@@ -1,110 +1,105 @@
-/**
- * @author markymouseee
- **/
 import java.util.Scanner;
 import java.util.InputMismatchException;
 
 public class Main {
+
+    private static Scanner scanner = new Scanner(System.in);
+    private static StudentManagementSystem sms;
+
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        boolean continueProgram = true;
+        System.out.println("Welcome to the Student Management System!");
 
-        while (continueProgram) {
-            int rowSize = 0;
-
-            while (true) {
-                try {
-                    System.out.print("Enter Row Size: ");
-                    rowSize = scanner.nextInt();
-                    if (rowSize <= 0) {
-                        throw new IllegalArgumentException("Row size must be a positive integer.");
-                    }
-                    break;
-                } catch (InputMismatchException e) {
-                    System.out.println("Invalid input. Please enter a positive integer for row size.");
-                    scanner.nextLine(); 
-                } catch (IllegalArgumentException e) {
-                    System.out.println(e.getMessage());
-                }
-            }
-
-            StudentManagementSystem sms = new StudentManagementSystem(rowSize);
-            sms.addStudent(rowSize);
-
-            sms.displayAllStudent();
-
-            scanner.nextLine();
-            System.out.print("Do you want to sort the list? (y) : (n) : ");
-            String sortList = scanner.nextLine();
-
-            if (sortList.equalsIgnoreCase("y") || sortList.equalsIgnoreCase("yes")) {
-                int sortOption = 0;
-
-                while (true) {
-                    try {
-                        System.out.println(
-                            "1. Sort by Firstname\n" +
-                            "2. Sort by GPA"
-                        );
-                        System.out.print("Enter number: ");
-                        sortOption = scanner.nextInt();
-                        if (sortOption != 1 && sortOption != 2) {
-                            throw new IllegalArgumentException("Invalid option. Please enter 1 or 2.");
-                        }
-                        break;
-                    } catch (InputMismatchException e) {
-                        System.out.println("Invalid input. Please enter a number (1 or 2).");
-                        scanner.nextLine();
-                    } catch (IllegalArgumentException e) {
-                        System.out.println(e.getMessage());
-                    }
-                }
-
-                if (sortOption == 1) {
-                    sms.sort_students_by_name();
-                    sms.displayAllStudent();
-                } else if (sortOption == 2) {
-                    sms.sort_students_by_gpa();
-                    sms.displayAllStudent();
-                }
-            }
-
-            find_student(scanner, sms);
-
-           
-            scanner.nextLine(); 
-            System.out.print("Do you want to continue? (y) : (n) : ");
-            String continueChoice = scanner.nextLine();
-            if (continueChoice.equalsIgnoreCase("n") || continueChoice.equalsIgnoreCase("no")) {
-                continueProgram = false;
-                System.out.println("Exiting the program. Goodbye!");
-            }
+        while (true) {
+            displayMainMenu();
+            int choice = getValidIntegerInput("Enter your choice: ");
+            handleMenuChoice(choice);
         }
-
-        scanner.close();
     }
 
-    public static void find_student(Scanner scanner, StudentManagementSystem sms) {
-        while (true) {
-            System.out.print("Find Student? : (y) : (n) : ");
-            String find = scanner.nextLine();
-            System.out.println();
+    private static void displayMainMenu() {
+        System.out.println("\nMain Menu:");
+        System.out.println("1. Add Student");
+        System.out.println("2. Display All Students");
+        System.out.println("3. Sort Students");
+        System.out.println("4. Find Student by ID");
+        System.out.println("5. Exit");
+    }
 
-            if (find.equalsIgnoreCase("y") || find.equalsIgnoreCase("yes")) {
-                try {
-                    System.out.print("Enter Student ID: ");
-                    int id = scanner.nextInt();
-                    sms.find_students_by_id(id);
-                    System.out.println();
-                } catch (InputMismatchException e) {
-                    System.out.println("Invalid input. Please enter a valid integer for Student ID.");
-                    scanner.nextLine();
+    private static void handleMenuChoice(int choice) {
+        switch (choice) {
+            case 1:
+                System.out.print("Enter number of Students to add: ");
+                int rowSize = getValidIntegerInput("");
+                sms = new StudentManagementSystem(rowSize);
+                sms.addStudent(rowSize);
+                break;
+            case 2:
+                if (sms != null) {
+                    sms.displayAllStudent();
+                } else {
+                    System.out.println("No students available. Please add students first.");
                 }
-            } else if (find.equalsIgnoreCase("n") || find.equalsIgnoreCase("no")) {
+                break;
+            case 3:
+                if (sms != null) {
+                    displaySortMenu();
+                } else {
+                    System.out.println("No students available to sort. Please add students first.");
+                }
+                break;
+            case 4:
+                if (sms != null) {
+                    findStudentById();
+                } else {
+                    System.out.println("No students available. Please add students first.");
+                }
+                break;
+            case 5:
                 System.out.println("Exiting the program. Goodbye!");
+                scanner.close();
                 System.exit(0);
-            } else {
-                System.out.println("Invalid input. Please enter 'y' or 'n'.");
+                break;
+            default:
+                System.out.println("Invalid choice. Please enter a number between 1 and 5.");
+                break;
+        }
+    }
+
+    private static void displaySortMenu() {
+        System.out.println(
+            "1. Sort by Firstname\n" +
+            "2. Sort by GPA"
+        );
+        int sortChoice = getValidIntegerInput("Enter number: ");
+        if (sortChoice == 1) {
+            sms.sort_students_by_name();
+            sms.displayAllStudent();
+        } else if (sortChoice == 2) {
+            sms.sort_students_by_gpa();
+            sms.displayAllStudent();
+        } else {
+            System.out.println("Invalid choice. Please select 1 or 2.");
+        }
+    }
+
+    private static void findStudentById() {
+        int id = getValidIntegerInput("Enter Student ID to find: ");
+        sms.find_students_by_id(id);
+    }
+
+    private static int getValidIntegerInput(String prompt) {
+        int input;
+        while (true) {
+            try {
+                if (!prompt.isEmpty()) {
+                    System.out.print(prompt);
+                }
+                input = scanner.nextInt();
+                scanner.nextLine();
+                return input;
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a valid integer.");
+                scanner.nextLine();
             }
         }
     }
