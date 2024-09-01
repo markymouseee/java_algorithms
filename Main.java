@@ -28,6 +28,7 @@ public class Main {
     private static void handleMenuChoice(int choice) {
         switch (choice) {
             case 1:
+                System.out.println();
                 System.out.print("Enter number of Students to add: ");
                 int rowSize = getValidIntegerInput("");
                 sms = new StudentManagementSystem(rowSize);
