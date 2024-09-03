@@ -26,7 +26,8 @@ public class Main {
         System.out.println("2. Display All Students");
         System.out.println("3. Sort Students");
         System.out.println("4. Find Student by ID");
-        System.out.println("5. Exit");
+        System.out.println("5. Remove Student by ID");
+        System.out.println("6. Exit");
     }
 
     private static void handleMenuChoice(int choice) {
@@ -60,6 +61,10 @@ public class Main {
                 }
                 break;
             case 5:
+                int id = getValidIntegerInput("Enter student id: ");
+                sms.removeStudent(id);
+                break;
+            case 6:
                 System.out.println("Exiting the program. Goodbye!");
                 scanner.close();
                 System.exit(0);

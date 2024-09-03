@@ -1,10 +1,8 @@
 /**
  * @author markymouseee
  **/
-
 import java.util.Scanner;
 import java.util.InputMismatchException;
-
 public class StudentManagementSystem {
     private Scanner scanner = new Scanner(System.in);
     public int row_size;
@@ -76,6 +74,8 @@ public class StudentManagementSystem {
                     System.out.println("Invalid input. Please enter a valid integer for Grade Level.");
                     scanner.nextLine();
                     System.out.println(e.getMessage());
+                }catch(IllegalArgumentException e){
+                    System.out.println(e.getMessage());
                 }
             }
     
@@ -120,6 +120,36 @@ public class StudentManagementSystem {
         for(int i = 0; i < this.Students.length; i++){
             System.out.println(Students[i]);
         }
+    }
+
+    public void removeStudent(int id){
+        int index_to_remove = -1;
+        for(int i = 0; i < Students.length - 1; i++){
+            if(Students[i].getStudentId() == id){
+                index_to_remove = i;
+                break;
+            }
+        }
+
+        Student[] newArray = new Student[Students.length - 1];
+
+        // Copy elements, skipping the one to be removed
+        for (int i = 0, j = 0; i < Students.length; i++) {
+            if (i != index_to_remove) {
+                newArray[j++] = Students[i];
+            }
+        }
+
+        // Replace the old array with the new one
+        Students = newArray;
+
+
+        if(index_to_remove == -1){
+            System.out.println("Student " + id + "not found.");
+            return;
+        }
+
+        System.out.println("Student remove done.");
     }
 
     public void sort_students_by_name(){
@@ -169,6 +199,8 @@ public class StudentManagementSystem {
                 }
             }
         }
+    
+        
 
         //binary search algorithm
         int start_index = 0;
