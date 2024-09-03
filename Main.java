@@ -61,8 +61,12 @@ public class Main {
                 }
                 break;
             case 5:
-                int id = getValidIntegerInput("Enter student id: ");
-                sms.removeStudent(id);
+                if(sms != null){
+                    int id = getValidIntegerInput("Enter student id: ");
+                    sms.removeStudent(id);
+                }else{
+                    System.out.println("No students available. Please add students first.");
+                }
                 break;
             case 6:
                 System.out.println("Exiting the program. Goodbye!");
