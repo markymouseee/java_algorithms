@@ -122,35 +122,52 @@ public class StudentManagementSystem {
         }
     }
 
-    public void removeStudent(int id){
+    public void removeStudent(int id) {
+        // Check if the Students array is empty
+        if (Students.length == 0) {
+            System.out.println("No students available. Please add students first.");
+            return;
+        }
+    
         int index_to_remove = -1;
-        for(int i = 0; i < Students.length - 1; i++){
-            if(Students[i].getStudentId() == id){
+        
+        // Search for the student with the given ID
+        for (int i = 0; i < Students.length; i++) {
+            if (Students[i].getStudentId() == id) {
                 index_to_remove = i;
                 break;
             }
         }
-
+    
+        // Check if the student was found
+        if (index_to_remove == -1) {
+            System.out.println("Student with ID " + id + " does not exist.");
+            return;
+        }
+    
+        // Handle the case where the array will become empty
+        if (Students.length == 1) {
+            Students = new Student[0];
+            System.out.println("Student removed and array is now empty.");
+            return;
+        }
+    
+        // Create a new array with one less element
         Student[] newArray = new Student[Students.length - 1];
-
-        // Copy elements, skipping the one to be removed
+    
+        // Copy elements except the one to be removed
         for (int i = 0, j = 0; i < Students.length; i++) {
             if (i != index_to_remove) {
                 newArray[j++] = Students[i];
             }
         }
-
+    
         // Replace the old array with the new one
         Students = newArray;
-
-
-        if(index_to_remove == -1){
-            System.out.println("Student " + id + "not found.");
-            return;
-        }
-
-        System.out.println("Student remove done.");
+    
+        System.out.println("Student removal done.");
     }
+    
 
     public void sort_students_by_name(){
         //Bubble sort (Acending)
