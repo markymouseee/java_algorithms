@@ -17,7 +17,7 @@ public class binarysearch {
             System.out.println(i);
         }
         
-        int search = 17;
+        int search = 9;
 
         int start_index = 0;
         int end_index = data.length - 1;
