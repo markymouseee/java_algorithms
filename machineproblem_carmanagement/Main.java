@@ -5,13 +5,18 @@ import java.util.Scanner;
 
 public class Main {
 
+    private static final String RED = "\u001B[31m";
+    private static final String GREEN = "\u001B[32m";
+    private static final String YELLOW = "\u001B[33m";
+    private static final String RESET = "\u001B[0m";
+
     private static Scanner scanner = new Scanner(System.in);
     private static CarManagementSystem cms;
     
     public static void main(String[] args) {
         while(true){
             displayMenu();
-            int choice = inputuser("Enter your choice: ");
+            int choice = inputuser(GREEN + "Enter your choice: " + RESET);
             choice(choice);
         }
     }
@@ -30,7 +35,7 @@ public class Main {
                 return input;
             } catch (InputMismatchException e) {
                 System.out.println();
-                System.out.println("Invalid input, please input a number only.");
+                System.out.println(RED + "Invalid input, please input a number only." + RESET);
                 scanner.nextLine();
             }
         }
@@ -39,31 +44,31 @@ public class Main {
     private static void choice(int choice){
         switch (choice) {
             case 1:
-                int listOfCars = inputuser("Enter a number of cars to add: ");
+                int listOfCars = inputuser(GREEN + "Enter a number of cars to add: " + RESET);
                 cms = new CarManagementSystem(listOfCars);
                 cms.addCars(listOfCars);
                 break;
             case 2:
                 if(cms != null){
                     System.out.println();
-                    System.out.print("Enter a car brand name: ");
+                    System.out.print(GREEN + "Enter a car brand name: " + RESET);
                     String brandname = scanner.nextLine();
                     cms.startEngine(brandname);
                 }else{
                     System.out.println();
-                    System.out.println("No car found, please add a car first");
+                    System.out.println(RED + "No car found, please add a car first" + RESET);
                     System.out.println();
                 }
                 break;
             case 3:
                 if(cms != null){
                     System.out.println();
-                    System.out.print("Enter a car brand name: ");
+                    System.out.print(GREEN + "Enter a car brand name: " + RESET);
                     String brandname = scanner.nextLine();
                     cms.stopEngine(brandname);
                 }else{
                     System.out.println();
-                    System.out.println("No car found, please add a car first");
+                    System.out.println(RED + "No car found, please add a car first" + RESET);
                     System.out.println();
                 }
                 break;
@@ -73,7 +78,8 @@ public class Main {
                     cms.displayInfo();
                 } else {
                     System.out.println();
-                    System.out.println("No car found, please add a car first");
+                    System.out.println(RED + "No car found, please add a car first" + RESET);
+                    System.out.println();
                 }
                 break;
             case 5:
@@ -82,7 +88,8 @@ public class Main {
                     cms.compareAge();
                 }else{
                     System.out.println();
-                    System.out.println("No car found, please add a car first");
+                    System.out.println(RED + "No car found, please add a car first" + RESET);
+                    System.out.println();
                 }
                 break;
             case 6:
@@ -92,16 +99,16 @@ public class Main {
                 break;
             default:
                 System.out.println();
-                System.out.println("Please input a number between 1-5");
+                System.out.println(RED + "No car found, please add a car first" + RESET);
                 System.out.println();
                 break;
         }
     }
 
     private static void displayMenu(){
-        System.out.println("----------------------------------------");
-        System.out.println("\n\tCar Management System\n");
-        System.out.println("----------------------------------------");
+        System.out.println(RED + "========================================" + RESET);
+        System.out.println(YELLOW + "\n\tCar Management System\n" + RESET);
+        System.out.println(RED + "========================================" + RESET);
         System.out.println("\n1. Add car (brand, model, year, color)");
         System.out.println("2. Start engine");
         System.out.println("3. Stop Engine");

@@ -1,6 +1,10 @@
 package machineproblem_carmanagement;
 
 public class Car {
+    private static final String GREEN = "\u001B[32m";
+    private static final String YELLOW = "\u001B[33m";
+    private static final String RESET = "\u001B[0m";
+
     private String brand;
     private String model;
     private int year;
@@ -54,18 +58,18 @@ public class Car {
     public void startEngine(){
         if(!engineStarted){
             engineStarted = true;
-            System.out.println("The engine of " + brand + " is started.");
+            System.out.println(GREEN + "The engine of " + brand + " is started." + RESET);
         }else{
-             System.out.println("The engine of " + brand + " is already running.");
+             System.out.println(YELLOW + "The engine of " + brand + " is already running." + RESET);
         }
     }
 
     public void stopEngine() {
         if (engineStarted) {
             engineStarted = false;
-            System.out.println("The engine of " + brand + " is stopped.");
+            System.out.println(GREEN + "The engine of " + brand + " is stopped." + RESET);
         } else {
-            System.out.println("The engine of " + brand + " is already off.");
+            System.out.println(YELLOW + "The engine of " + brand + " is already off." + RESET);
         }
     }
 
@@ -83,12 +87,12 @@ public class Car {
    @Override
     public String toString(){
         return(
-            "----------------------------\n" +
+            YELLOW + "========================================\n" + RESET +
             "Car Brand: " + brand + "\n" +
             "Car Model: " + model + "\n" +
             "Car Year:  " + year + "\n" +
             "Car Color: " + color + "\n" +
-            "----------------------------" 
+            YELLOW + "========================================" + RESET
         );
     }
 }

@@ -6,7 +6,6 @@ import java.util.Scanner;
 public class CarManagementSystem {
     private final Car[] Cars;
     private static final Scanner scanner = new Scanner(System.in);
-
     private static final String CYAN = "\u001B[35m";
     private static final String RED = "\u001B[31m";
     private static final String GREEN = "\u001B[32m";
@@ -25,16 +24,16 @@ public class CarManagementSystem {
         System.out.println();
 
         for(int i = 0; i < row_size; i++){
-            System.out.print("Enter a car brand: ");
+            System.out.print(GREEN + "Enter a car brand: " + RESET);
             brand =  scanner.nextLine();
               
-            System.out.print("Enter a car model: ");
+            System.out.print(GREEN + "Enter a car model: " + RESET);
             model = scanner.nextLine();
 
        
            while(true){
                 try {
-                    System.out.print("Enter a car year : ");
+                    System.out.print(GREEN + "Enter a car year : " + RESET);
                     year = scanner.nextInt();
 
                     if(year <= 0){
@@ -52,13 +51,13 @@ public class CarManagementSystem {
                     
             scanner.nextLine();
            
-            System.out.print("Enter a car color: ");
+            System.out.print(GREEN + "Enter a car color: " + RESET);
             color = scanner.nextLine();
             
 
             Cars[i] = new Car(brand, model, year, color);
             System.out.println();
-            System.out.println(GREEN + "Car added successfully" + RESET);
+            System.out.println(YELLOW + "Car added successfully" + RESET);
             System.out.println();
         }
     }
@@ -131,7 +130,7 @@ public class CarManagementSystem {
             return;
         }
     
-        System.out.println("Select two cars to compare by age:");
+        System.out.println(YELLOW + "Select two cars to compare by age:" + RESET);
     
         for (int i = 0; i < Cars.length; i++) {
             System.out.println((i + 1) + ". " + Cars[i].getBrand() + " - " + Cars[i].getModel() + " (" + Cars[i].getYear() + ")");
@@ -141,7 +140,7 @@ public class CarManagementSystem {
         int secondCarIndex = -1;
     
         while (firstCarIndex < 0 || firstCarIndex >= Cars.length) {
-            System.out.print("Enter the number of the first car: ");
+            System.out.print(GREEN + "Enter the number of the first car: " + RESET);
             try {
                 firstCarIndex = scanner.nextInt() - 1;
             } catch (InputMismatchException e) {
@@ -151,7 +150,7 @@ public class CarManagementSystem {
         }
     
         while (secondCarIndex < 0 || secondCarIndex >= Cars.length) {
-            System.out.print("Enter the number of the second car: ");
+            System.out.print(GREEN + "Enter the number of the second car: " + RESET);
             try {
                 secondCarIndex = scanner.nextInt() - 1;
             } catch (InputMismatchException e) {
@@ -176,9 +175,9 @@ public class CarManagementSystem {
     }
 
     public void displayInfo(){
-        System.out.println("----------------------------\n" +
-                           CYAN + "\tList of Cars" + RESET +
-                           "\n----------------------------");
+        System.out.println(RED + "========================================\n" + RESET +
+                           CYAN + "\t      List of Cars" + RESET +
+                           RED + "\n========================================" + RESET);
         for(Car Car : this.Cars) {
             System.out.println(Car);
             System.out.println();
