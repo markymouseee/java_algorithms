@@ -2,7 +2,7 @@
  * @author markymouseee
  **/
 
-package Searching;
+package Searching_Algorithm;
 
 public class linearsearch {
     public static void main(String[] args) {

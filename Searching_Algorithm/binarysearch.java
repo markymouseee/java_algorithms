@@ -2,7 +2,7 @@
  * @author markymouseee
  **/
 
-package Searching;
+package Searching_Algorithm;
 
 import java.util.Arrays;
 public class binarysearch {
