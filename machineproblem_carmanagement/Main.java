@@ -103,7 +103,7 @@ public class Main {
                 break;
             default:
                 System.out.println();
-                System.out.println(RED + "No car found, please add a car first" + RESET);
+                System.out.println(RED + "Please enter a number between [1-6]" + RESET);
                 System.out.println();
                 break;
         }
