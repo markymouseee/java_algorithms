@@ -1,3 +1,7 @@
+/**
+ * @author markymouseee
+ **/
+
 package Searching;
 
 public class linearsearch {

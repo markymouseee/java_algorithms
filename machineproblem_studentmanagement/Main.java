@@ -2,6 +2,8 @@
  * @author markymouseee
  **/
 
+package machineproblem_studentmanagement;
+
 import java.util.Scanner;
 import java.util.InputMismatchException;
 

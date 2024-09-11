@@ -1,3 +1,7 @@
+/**
+ * @author markymouseee
+ **/
+
 package Searching;
 
 import java.util.Arrays;
