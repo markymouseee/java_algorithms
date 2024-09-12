@@ -1,3 +1,7 @@
+/**
+ * @author markymouseee
+ **/
+
 package oop_homework_problem;
 
 abstract class Appliance {
